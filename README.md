@@ -8,7 +8,7 @@
 <hr>
 
  ## Versions
- __v1.0.00__ - Main code with future updates planned!
+ __v2.0.00__ - I added Start Up Animtions, sounds, and more!
 
  <hr>
 
@@ -19,8 +19,8 @@
 
 - [x] Main Home Screen
 - [ ] All icons
-- [ ] Interface sounds
-- [ ] Startup screen
+- [x] Interface sounds
+- [x] Startup screen
 - [ ] Other menu screens
 </details>
 
