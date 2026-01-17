@@ -1,5 +1,4 @@
 body {
-    
     background: url(../assets/images/background.png);
     background-size: auto 100vh; 
     /*
@@ -9,7 +8,11 @@ body {
     font-family: "Open Sans", sans-serif;
     margin: 0;
     overflow: hidden;
+    user-select: none;
+    background-color: #000;
 }
+
+/* --- Typography --- */
 
 h1 {
     color: #a3a4a8;
@@ -17,6 +20,7 @@ h1 {
     cursor: pointer;
     font-size: 2.5vw;
     font-weight: 100;
+    transition: color 0.2s, transform 0.2s;
 }
 
 h2 {
@@ -24,6 +28,7 @@ h2 {
     margin: 0.3vw 0.7vw;
     font-size: 1.3vw;
     font-weight: 100;
+    pointer-events: none;
 }
 
 h3 {
@@ -37,17 +42,16 @@ h1.selected {
     color: white;
 }
 
-.tile.selected {
-    opacity: 1;
-}
+/* --- Navbar & Header --- */
 
 .user {
     position: absolute;
     display: flex;
     align-items: center;
-    right: 5vw;
-    top: 2.5vw;
+    right: 8vw; /* Updated positioning */
+    top: 3vh;   /* Updated positioning */
     gap: 1vw;
+    z-index: 20;
 }
 
 .user img {
@@ -74,12 +78,15 @@ h1.selected {
     width: 4.5vw;
     height: 4vw;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
 .searchbar h1 {
     color: #ebebeb;
     font-size: 3vw;
 }
+
+/* --- Tiles Logic --- */
 
 .tiles {
     display: flex;
@@ -96,6 +103,10 @@ h1.selected {
     gap: 0.4vw;
     opacity: 0.75;
     transition: opacity 0.3s ease-in-out
+}
+
+.tile.selected {
+    opacity: 1;
 }
 
 .tile.big {
@@ -128,18 +139,16 @@ h1.selected {
     width: 71vw;
 }
 
+/* --- Interactive Elements --- */
+
 .banner {
     display: flex;
     align-items: flex-end;
     width: 100%;
     height: 100%;
     background: url(../assets/images/logo.png) center center / 25vw no-repeat #1d1d1d;
+    cursor: pointer;
     transition: scale 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.banner:hover {
-    scale: 1.05;
-    box-shadow: black 0 0 20px;
 }
 
 .rectangle {
@@ -151,10 +160,23 @@ h1.selected {
     transition: scale 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.rectangle:hover {
-    scale: 1.1;
-    box-shadow: black 0 0 20px;
+.square {
+    display: flex;
+    align-items: flex-end;
+    width: 13.5vw;
+    height: 13.5vw;
+    cursor: pointer;
+    transition: scale 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
+/* Consolidated Hover Effects */
+.banner:hover, .rectangle:hover, .square:hover {
+    scale: 1.05;
+    box-shadow: black 0 0 20px;
+    z-index: 5;
+}
+
+/* --- Icons: Rectangles --- */
 
 .rectangle.one {background: url(../assets/images/icons/open-tray.png) center center / 6vw no-repeat #008a00;}
 .rectangle.one:hover {background: url(../assets/images/icons/open-tray.png) center center / 6vw no-repeat, linear-gradient(to left top, #008a00, #58a658);}
@@ -197,19 +219,7 @@ h1.selected {
 .rectangle.twenty {background: url(../assets/images/icons/search.png) center center / 6vw no-repeat #008a00;}
 .rectangle.twenty:hover {background: url(../assets/images/icons/search.png) center center / 6vw no-repeat, linear-gradient(to left top, #008a00, #58a658);}
 
-.square {
-    display: flex;
-    align-items: flex-end;
-    width: 13.5vw;
-    height: 13.5vw;
-    cursor: pointer;
-    transition: scale 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.square:hover {
-    scale: 1.1;
-    box-shadow: black 0 0 20px;
-}
+/* --- Icons: Squares --- */
 
 .square.one {background: url(../assets/images/icons/system.png) center center / 6vw no-repeat #008a00;}
 .square.one:hover {background: url(../assets/images/icons/system.png) center center / 6vw no-repeat, linear-gradient(to left top, #008a00, #58a658);}
@@ -228,12 +238,14 @@ h1.selected {
 .square.eight {background: url(../assets/images/icons/sign-out.png) center center / 6vw no-repeat #008a00;}
 .square.eight:hover {background: url(../assets/images/icons/sign-out.png) center center / 6vw no-repeat, linear-gradient(to left top, #008a00, #58a658);}
 
+/* --- Footer Tips --- */
+
 .tips {
     position: absolute;
     display: flex;
     align-items: center;
     bottom: 2.2vw;
-    left: 9vw;
+    left: 18vw; /* Updated positioning */
     gap: 0.2vw;
 }
 
@@ -246,4 +258,58 @@ h1.selected {
     margin: 0 1vw 0 0;
     font-size: 1.5vw;
     text-shadow: 0 0 2px black;
+}
+
+/* --- STARTUP & ANIMATION --- */
+
+.dashboard-container {
+    opacity: 0; 
+}
+
+#startup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: black;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out;
+}
+
+#startup-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#start-prompt {
+    display: none; 
+    color: white; 
+    position: absolute; 
+    bottom: 20%; 
+    font-size: 2vw;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInEntrance {
+    0% {
+        transform: translateY(150px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.entrance-anim {
+    opacity: 1 !important;
+    animation: slideInEntrance 0.8s cubic-bezier(0.2, 0.0, 0.2, 1) forwards;
 }
