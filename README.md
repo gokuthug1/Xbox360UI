@@ -26,4 +26,4 @@
 
 <hr>
 
->__Finally [here](https://irv77.github.io/Xbox360UI/) is the live version of the code!__
+>__Finally [here](https://gokuthug1.github.io/Xbox360UI/) is the live version of the code!__
